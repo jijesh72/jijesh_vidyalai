@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import styled from '@emotion/styled';
+import axios from 'axios';
 
 const PostContainer = styled.div(() => ({
   width: '300px',
@@ -53,16 +54,27 @@ const Button = styled.button(() => ({
   fontSize: '20px',
   cursor: 'pointer',
   height: '50px',
+  
 }));
 
-const PrevButton = styled(Button)`
-  left: 10px;
+const PrevButton = styled(Button)
+`
+position: 'absolute';
+left: 10px;
+top: 0;
+bottom: 0;
+margin: auto;
+
 `;
 
 const NextButton = styled(Button)`
-  right: 10px;
-`;
+right: 10px;
+position: 'absolute';
+top: 0;
+bottom: 0;
+margin: auto;
 
+`;
 const Post = ({ post }) => {
   const carouselRef = useRef(null);
 
