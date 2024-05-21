@@ -41,7 +41,7 @@ export default function Posts() {
   useEffect(() => {
     const fetchPost = async () => {
       const { data: newPosts } = await axios.get('/api/v1/posts', {
-        params: { start: 0, limit: isSmallerDevice ? 5 : 10 },
+        params: { start: 0, limit: isSmallerDevice ? 5 : 12 },
       });
       console.log(newPosts);
       setPosts(newPosts)
