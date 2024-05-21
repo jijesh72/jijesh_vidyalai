@@ -16,11 +16,13 @@ router.get('/', async (req, res) => {
     posts.map(async post => {
       // TODO use this route to fetch photos for each post
       const images=await axios.get(`https://jsonplaceholder.typicode.com/albums/${post.id}/photos`);
+      const { data: user } = await fetchUserById(post.userId);
       
       // console.log(images);
       return {
         ...post,
-        images: images.data
+        images: images.data,
+        user
       };
     }, []),
   );
