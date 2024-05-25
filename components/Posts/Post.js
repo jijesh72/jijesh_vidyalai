@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import styled from '@emotion/styled';
-import axios from 'axios';
 
 const PostContainer = styled.div(() => ({
   width: '300px',
@@ -54,27 +53,44 @@ const Button = styled.button(() => ({
   fontSize: '20px',
   cursor: 'pointer',
   height: '50px',
-  
 }));
 
-const PrevButton = styled(Button)
-`
-position: 'absolute';
-left: 10px;
-top: 0;
-bottom: 0;
-margin: auto;
-
+const PrevButton = styled(Button)`
+  position: 'absolute';
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 `;
 
 const NextButton = styled(Button)`
-right: 10px;
-position: 'absolute';
-top: 0;
-bottom: 0;
-margin: auto;
-
+  right: 10px;
+  position: 'absolute';
+  top: 0;
+  bottom: 0;
+  margin: auto;
 `;
+
+const UserContainer = styled.div(() => ({
+  display: 'flex',
+  margin: '1rem',
+  gap: '2rem',
+  alignItems: 'center',
+}));
+
+const UserThumbnail = styled.div(() => ({
+  fontWeight: 'bold',
+  color: 'white',
+  backgroundColor: 'gray',
+  padding: '1rem',
+  borderRadius: '100%',
+  height: '2rem',
+  width: '2rem',
+  display: 'flex',
+  fontSize: '1.3rem',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
 const Post = ({ post }) => {
   const carouselRef = useRef(null);
 
@@ -90,14 +106,26 @@ const Post = ({ post }) => {
   const handlePrevClick = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: -420,
+        left: -300,
         behavior: 'smooth',
       });
     }
   };
 
+  const userNameShortened = post?.user?.name?.split(' ');
+
   return (
     <PostContainer>
+      <UserContainer>
+        <UserThumbnail>
+          {userNameShortened[0][0] + ' ' + userNameShortened[1][0]}
+        </UserThumbnail>
+        <div>
+          <p style={{ fontWeight: 'bold' }}>{post.user?.name}</p>
+          <p>{post.user?.email}</p>
+        </div>
+      </UserContainer>
+
       <CarouselContainer>
         <Carousel ref={carouselRef}>
           {post.images.map((image, index) => (

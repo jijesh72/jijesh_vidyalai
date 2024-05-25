@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
       const images=await axios.get(`https://jsonplaceholder.typicode.com/albums/${post.id}/photos`);
       const { data: user } = await fetchUserById(post.userId);
       
-      // console.log(images);
+      console.log(user.name);
       return {
         ...post,
         images: images.data,
